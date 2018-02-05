@@ -26,17 +26,17 @@ class TreeNode:
 
 class Solution:
     # 返回构造的TreeNode根节点
-    def reConstructBinaryTree(self, pre, tin):
-        # write code here
-        if len(pre) == 0:
+    def reConstructTree(self, preOrderList, midOrderList):
+        if len(preOrderList) == 0:
             return None
-            # 前序遍历的第一个结点一定是根节点
-        root = TreeNode(pre[0])
-        # 获取中序遍历中根节点的索引
-        i = tin.index(pre[0])
+        if len(midOrderList) == 0:
+            return None
 
-        root.left = self.reConstructBinaryTree(pre[1: i + 1], tin[:i])
-        root.right = self.reConstructBinaryTree(pre[i + 1:], tin[i + 1:])
+        root = TreeNode(preOrderList[0])
+        i = midOrderList.index(preOrderList[0])
+
+        root.left = self.reConstructBinaryTree(preOrderList[1: i+1], midOrderList[ :i])
+        root.right = self.reConstructTree(preOrderList[i+1: ], midOrderList[i+1: ])
         return root
 
 
@@ -44,7 +44,7 @@ if __name__ == "__main__":
     a = Solution()
     pre_order = [1, 2, 4, 7, 3, 5, 6, 8]  # 前序遍历
     mid_order = [4, 7, 2, 1, 5, 3, 8, 6]  # 中序遍历
-    root = a.reConstructBinaryTree(pre_order, mid_order)
+    root = a.reConstructTree(pre_order, mid_order)
     print root.val
     print root.left.val
     print root.right.val
