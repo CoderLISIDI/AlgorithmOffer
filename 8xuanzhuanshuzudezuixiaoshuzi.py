@@ -67,7 +67,7 @@ class Solution:
                 result = i
         return result
 
-    
+
 
 Test = Solution()
 print(Test.minNumberInRotateArray([4, 5, 1, 2, 3]))
